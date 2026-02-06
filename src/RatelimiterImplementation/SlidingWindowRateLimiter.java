@@ -27,10 +27,9 @@ public class SlidingWindowRateLimiter implements RateLimiter{
         Queue<Long> requestHistory = clientRequestHistory.get(clientId);
 
         while(!requestHistory.isEmpty() && currTime - requestHistory.peek() > timeWindow){
-            System.out.println("yaha pe aaya kya");
             requestHistory.poll();
         }
-        System.out.println("qsize "+requestHistory.size());
+
         if(requestHistory.size() < noOfRequestPerUnitTime){
             requestHistory.add(currTime);
             return true;
